@@ -28,6 +28,14 @@ export class QueryAdapter {
 		return extract(databaseId, filter);
 	}
 
+	async listBlocks(pageId: string) {
+		return await this.notion.blocks.children
+			.list({ block_id: pageId })
+			.catch((err) => {
+				return null;
+			});
+	}
+
 	async retrievePage(pageId: string) {
 		return this.notion.pages.retrieve({ page_id: pageId }).catch((err) => {
 			return null;
